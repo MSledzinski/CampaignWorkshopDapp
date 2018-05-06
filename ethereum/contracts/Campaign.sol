@@ -92,6 +92,20 @@ contract Campaign {
         request.recipient.transfer(request.value);
     }
     
+    function getSummary() public view returns (uint256, uint256, uint256, uint256, address) {
+        return (
+            minimumContribution,
+            address(this).balance,
+            requests.length,
+            approversCount,
+            manager
+        );
+    }
+
+    function getRequestCount() public view returns (uint256) {
+        return requests.length;
+    }
+
     // PRIVATE ///////////////////////////
     function hasPaidAboveMin(uint value, uint min) private pure {
         require(value >= min);
